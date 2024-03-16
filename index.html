@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>District Scores</title>
+<style>
+  body {
+    background-color: #121212;
+    color: #FFFFFF;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #FFFFFF;
+  }
+  input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: #FFFFFF;
+    cursor: pointer;
+  }
+  .district-score {
+    margin-top: 20px;
+  }
+  .district-names {
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>District Scores</h1>
+  <form id="scoreForm">
+    <label for="thurbligz">Enter Thurbligz:</label>
+    <input type="text" id="thurbligz" name="thurbligz">
+    <label for="vanguards">Enter Vanguards:</label>
+    <input type="text" id="vanguards" name="vanguards">
+    <label for="tigers">Enter Tigers:</label>
+    <input type="text" id="tigers" name="tigers">
+    <label for="ballisticKnights">Enter Ballistic Knights:</label>
+    <input type="text" id="ballisticKnights" name="ballisticKnights">
+    <label for="bitDefenders">Enter Bit Defenders:</label>
+    <input type="text" id="bitDefenders" name="bitDefenders">
+    <label for="serpents">Enter Serpents:</label>
+    <input type="text" id="serpents" name="serpents">
+    <input type="submit" value="Submit">
+  </form>
+  <div id="districtScores" class="district-score"></div>
+  <div id="districtNames" class="district-names"></div>
+</div>
+
+<script>
+  document.getElementById("scoreForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    let thurbligz = parseFloat(document.getElementById("thurbligz").value) || 0;
+    let vanguards = parseFloat(document.getElementById("vanguards").value) || 0;
+    let tigers = parseFloat(document.getElementById("tigers").value) || 0;
+    let ballisticKnights = parseFloat(document.getElementById("ballisticKnights").value) || 0;
+    let bitDefenders = parseFloat(document.getElementById("bitDefenders").value) || 0;
+    let serpents = parseFloat(document.getElementById("serpents").value) || 0;
+
+    let districts = [
+      { name: "Thurbligz", score: thurbligz },
+      { name: "Vanguards", score: vanguards },
+      { name: "Tigers", score: tigers },
+      { name: "Ballistic Knights", score: ballisticKnights },
+      { name: "Bit Defenders", score: bitDefenders },
+      { name: "Serpents", score: serpents }
+    ];
+
+    districts.sort((a, b) => b.score - a.score);
+
+    let outputScores = "<h2>District Scores</h2><ul>";
+    districts.forEach(district => {
+      outputScores += "<li>" + district.name + ": " + district.score + "</li>";
+    });
+    outputScores += "</ul>";
+
+    document.getElementById("districtScores").innerHTML = outputScores;
+
+    let outputNames = "<h2>District Names</h2><ul>";
+    districts.forEach(district => {
+      outputNames += "<li>" + district.name + "</li>";
+    });
+    outputNames += "</ul>";
+
+    document.getElementById("districtNames").innerHTML = outputNames;
+  });
+</script>
+</body>
+</html>
